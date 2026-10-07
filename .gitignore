@@ -1,0 +1,29 @@
+# Build output
+build/
+target/
+*.class
+
+# Local database files -- may contain real participants' data. Never commit.
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Secrets / local configuration
+.env
+.env.*
+
+# Reports exported from the admin panel (they contain participants' names)
+trilha-magica-relatorio*
+*.csv
+
+# Logs, OS and IDE files
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml

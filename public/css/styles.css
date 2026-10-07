@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap');
+
+:root{
+  /* tema padrão (login/finalização): azul claro neutro */
+  --bg-a:#EAF6FF;
+  --bg-b:#DCEFFF;
+  --bg-c:#CFE8FF;
+
+  --coral:#FF6F5E;
+  --teal:#0FB6A6;
+  --gold:#FFB100;
+  --violet:#7C6FE0;
+
+  --ink:#1D2B4C;
+  --ink-dim:#516083;
+  --card:rgba(255,255,255,0.82);
+  --card-border:#BFE0FF;
+  --card-shadow:0 12px 34px rgba(70,120,190,.16);
+}
+
+/* ---- Temas por jogo: tons de azul mais claros, cada um com uma variação ---- */
+body.theme-home{ --bg-a:#EAF6FF; --bg-b:#DCEFFF; --bg-c:#CDE7FF; }
+body.theme-g1{ --bg-a:#EFF6FF; --bg-b:#DCEBFF; --bg-c:#CBDCFF; }   /* Cores Mágicas  azul-lavanda */
+body.theme-g2{ --bg-a:#E7F8FF; --bg-b:#D2F0FF; --bg-c:#B9E7F7; }   /* Caminho do Tesouro  azul-oceano */
+body.theme-g3{ --bg-a:#EDF0FF; --bg-b:#DCE3FF; --bg-c:#C7D4FF; }   /* Regra da Magia  azul-noite claro */
+body.theme-finished{ --bg-a:#EAFBF4; --bg-b:#DBF4FF; --bg-c:#D0EAFF; }
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:
+    radial-gradient(1100px 750px at 12% -8%, var(--bg-c) 0%, transparent 60%),
+    radial-gradient(950px 700px at 108% 8%, var(--bg-b) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-a), var(--bg-b));
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ---- Arte de fundo temática (SVG decorativo por jogo) ---- */
+.bg-art{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.bg-art svg{ width:100%; height:100%; }
+
+#app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center;}
+h1,h2,h3{font-family:'Fredoka',sans-serif; margin:0;}
+
+/* área do jogo  ocupa a maior parte da tela */
+.screen{
+  width:100%;
+  max-width:min(1180px, 96vw);
+  padding:clamp(16px,3vw,36px) clamp(12px,3vw,28px) 50px;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  min-height:100vh;
+  justify-content:center;
+}
+
+.eyebrow{
+  font-family:'Fredoka',sans-serif; letter-spacing:.08em; text-transform:uppercase;
+  font-size:clamp(13px,1.6vw,15px); color:#B8860B; font-weight:700; margin-bottom:6px;
+}
+.big-title{font-size:clamp(30px,5.4vw,50px); font-weight:700; line-height:1.15; color:var(--ink); text-shadow:0 2px 16px rgba(120,160,220,.25);}
+.subtitle{color:var(--ink-dim); font-size:clamp(16px,2vw,19px); margin-top:12px; max-width:640px; line-height:1.55; font-weight:600;}
+.card{
+  background:var(--card); border:2px solid var(--card-border); border-radius:28px;
+  padding:clamp(20px,4vw,36px); width:100%; max-width:520px; margin-top:28px; backdrop-filter:blur(6px);
+  box-shadow:var(--card-shadow);
+}
+.btn{
+  font-family:'Fredoka',sans-serif; font-weight:700; font-size:clamp(18px,2.3vw,22px); cursor:pointer;
+  border:none; border-radius:20px; padding:18px 40px; color:#3A1F00;
+  background:linear-gradient(135deg, var(--gold), var(--coral));
+  box-shadow:0 10px 26px rgba(255,111,94,.38);
+  transition:transform .15s ease, box-shadow .15s ease;
+  margin-top:26px;
+}
+.btn:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 14px 32px rgba(255,111,94,.48);}
+.btn:active{transform:translateY(0) scale(.97);}
+.btn.secondary{background:transparent; color:var(--ink); border:2px solid var(--card-border); box-shadow:none;}
+.btn.secondary:hover{border-color:var(--violet); box-shadow:0 0 0 4px rgba(124,111,224,.15);}
+.btn:disabled{opacity:.5; cursor:not-allowed; transform:none;}
+input.name-input{
+  font-family:'Fredoka',sans-serif; font-size:clamp(18px,2.4vw,22px); padding:18px 22px; border-radius:18px;
+  border:2px solid var(--card-border); background:#FFFFFF; color:var(--ink);
+  width:100%; text-align:center; outline:none;
+}
+input.name-input:focus{border-color:var(--teal); box-shadow:0 0 0 5px rgba(15,182,166,.18);}
+.progress-dots{display:flex; gap:12px; margin-bottom:20px;}
+.dot{width:13px; height:13px; border-radius:50%; background:rgba(80,110,160,.22); transition:all .25s;}
+.dot.active{background:var(--gold); box-shadow:0 0 0 6px rgba(255,177,0,.22);}
+.dot.done{background:var(--teal);}
+.error-text{color:#D64545; font-size:14px; margin-top:10px; min-height:18px; font-weight:700;}
+
+/* ---- Stroop (Jogo 1) ---- */
+.stroop-word{
+  font-family:'Fredoka',sans-serif; font-weight:700; font-size:clamp(56px,14vw,140px);
+  margin:clamp(20px,5vh,50px) 0; user-select:none; letter-spacing:.02em;
+  text-shadow:0 4px 0 rgba(0,0,0,.06);
+}
+.color-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2.4vw,26px); width:100%; max-width:620px;}
+.color-btn{
+  font-family:'Fredoka',sans-serif; font-weight:800; font-size:clamp(22px,3.2vw,32px); color:var(--ink);
+  background:#FFFFFF; border:3px solid var(--card-border); border-radius:24px; padding:clamp(28px,5vh,44px) 10px; cursor:pointer;
+  box-shadow:0 8px 22px rgba(0,0,0,.1); transition:transform .1s, border-color .1s; letter-spacing:.02em;
+}
+.color-btn:hover{border-color:var(--accent, #7C6FE0);}
+.color-btn:active{transform:scale(.95);}
+.stroop-feedback{height:32px; margin-top:16px; font-weight:800; font-family:'Fredoka',sans-serif; font-size:clamp(16px,2vw,20px);}
+.hud{display:flex; gap:22px; justify-content:center; margin-top:18px; color:var(--ink-dim); font-size:clamp(14px,1.6vw,17px); flex-wrap:wrap; font-weight:700;}
+.hud b{color:var(--ink);}
+
+/* ---- Caminho do Tesouro (Jogo 2) ---- */
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2.2vw,24px); width:min(88vw, 620px); margin:clamp(24px,5vh,44px) auto;}
+.block{
+  aspect-ratio:1; border-radius:24px; background:#FFFFFFCC; border:3px solid var(--card-border);
+  cursor:pointer; transition:background .15s, transform .1s, box-shadow .15s;
+  box-shadow:0 6px 14px rgba(70,120,190,.12);
+}
+.block.lit{background:linear-gradient(135deg, var(--teal), var(--violet)); box-shadow:0 0 34px rgba(15,182,166,.55); transform:scale(1.04); border-color:transparent;}
+.block.clicked-correct{background:linear-gradient(135deg,#0FB6A6,#2FBFA0); box-shadow:0 0 26px rgba(15,182,166,.5); border-color:transparent; animation:pulseGood .35s ease;}
+.block.clicked-wrong{background:linear-gradient(135deg,#FF6F5E,#D64545); box-shadow:0 0 26px rgba(255,111,94,.5); border-color:transparent; animation:shakeBad .35s ease;}
+.block:active{transform:scale(.96);}
+.seq-status{font-family:'Fredoka',sans-serif; font-size:clamp(17px,2.2vw,22px); color:#B8860B; min-height:28px; margin-top:8px; font-weight:700;}
+
+/* ---- Regra da Magia (Jogo 3) ---- */
+.ref-card, .opt-card{
+  background:#FFFFFFDD; border:3px solid var(--card-border); border-radius:24px;
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px;
+  padding:16px; box-shadow:0 6px 16px rgba(70,120,190,.12);
+}
+.ref-card{width:clamp(150px,20vw,220px); height:clamp(150px,20vw,220px); margin:clamp(20px,4vh,34px) auto 14px; font-size:clamp(34px,5vw,52px);}
+
+/* ---- Sequência de exemplo (carta de referência + seta + carta-exemplo) ---- */
+.rule-example{display:flex; align-items:center; justify-content:center; gap:clamp(10px,2.4vw,22px); flex-wrap:wrap; width:100%;}
+.rule-example .ref-card{margin:clamp(20px,4vh,34px) 0 14px;}
+.seq-arrow{font-family:'Fredoka',sans-serif; font-weight:800; font-size:clamp(28px,4vw,42px); color:var(--ink-dim);}
+.example-card{opacity:.85;}
+
+.opts-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(16px,2.4vw,26px); width:100%; max-width:640px; margin-top:16px;}
+.opt-card{height:clamp(120px,16vw,170px); font-size:clamp(26px,3.6vw,38px); cursor:pointer; transition:transform .1s, border-color .15s;}
+.opt-card:hover{border-color:var(--violet);}
+.opt-card:active{transform:scale(.95);}
+.opt-card.right-flash{border-color:var(--teal); box-shadow:0 0 26px rgba(15,182,166,.5); animation:pulseGood .35s ease;}
+.opt-card.wrong-flash{border-color:var(--coral); box-shadow:0 0 26px rgba(255,111,94,.5); animation:shakeBad .35s ease;}
+
+@keyframes pulseGood{ 0%{transform:scale(1);} 40%{transform:scale(1.08);} 100%{transform:scale(1);} }
+@keyframes shakeBad{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-7px);} 75%{transform:translateX(7px);} }
+@keyframes wordPop{
+  0%{ transform:scale(.72) rotate(-3deg); opacity:0; }
+  60%{ transform:scale(1.06) rotate(1deg); opacity:1; }
+  100%{ transform:scale(1) rotate(0); opacity:1; }
+}
+.stroop-word{ animation:wordPop .38s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ---- Vidas (Jogo 2) ---- */
+.lives-row{display:flex; gap:10px; justify-content:center; margin-bottom:8px;}
+.life-dot{
+  width:22px; height:22px; border-radius:50%; border:3px solid var(--coral);
+  background:var(--coral); transition:all .3s;
+}
+.life-dot.lost{ background:transparent; border-color:#D8D8D8; }
+
+/* ---- Badge de tempo restante ---- */
+.time-badge{
+  display:inline-flex; align-items:center; gap:6px; font-family:'Fredoka',sans-serif; font-weight:700;
+  font-size:clamp(13px,1.6vw,15px); background:#FFFFFFCC; border:2px solid var(--card-border);
+  border-radius:999px; padding:6px 16px; color:var(--ink-dim); margin-top:6px;
+}
+.time-badge.low{ color:#D64545; border-color:#F3B8B8; }
+
+.phase-status{font-family:'Fredoka',sans-serif; font-size:clamp(15px,1.9vw,18px); color:var(--ink-dim); margin-top:4px; font-weight:700;}
+
+/* ---- Finalizado ---- */
+.summary-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; width:100%; max-width:700px; margin-top:14px;}
+.summary-box{background:var(--card); border-radius:20px; padding:18px 10px; border:2px solid var(--card-border); box-shadow:var(--card-shadow);}
+.summary-box .lbl{font-size:12.5px; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.05em; font-weight:800;}
+.summary-box .val{font-family:'Fredoka',sans-serif; font-size:clamp(20px,2.6vw,26px); margin-top:5px; color:#B8860B;}
+
+@media (max-width:480px){ .summary-grid{grid-template-columns:1fr;} }
+
+/* ---- Contagem regressiva da tela de apresentação ---- */
+.intro-countdown{
+  font-family:'Fredoka',sans-serif; font-weight:700; font-size:15px; color:var(--ink-dim);
+  margin-top:14px; background:#FFFFFFCC; border:2px solid var(--card-border); border-radius:999px;
+  padding:8px 18px; display:inline-block;
+}
+.intro-countdown.low{ color:#D64545; border-color:#F3B8B8; animation:pulseGood .6s ease infinite alternate; }
+
+/* ---- Alerta de fluxo linear (impede voltar/pular etapas) ---- */
+.flow-alert-overlay{
+  position:fixed; inset:0; background:rgba(20,25,50,.6); z-index:999;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.flow-alert-panel{
+  background:#fff; border-radius:24px; max-width:420px; width:100%; padding:32px 28px; text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.flow-alert-panel h2{font-family:'Fredoka',sans-serif; margin-top:10px; color:var(--ink);}
+.flow-alert-panel p{color:var(--ink-dim); margin-top:10px; line-height:1.5; font-weight:600;}
+.flow-alert-panel .btn{margin-top:18px;}
+
+/* ---- Rodapé de atribuição ---- */
+.attribution-footer{
+  position:fixed; bottom:8px; left:0; right:0; text-align:center; font-size:11.5px;
+  color:var(--ink-dim); opacity:.65; z-index:2; pointer-events:none;
+}
+.attribution-footer strong{font-weight:800;}

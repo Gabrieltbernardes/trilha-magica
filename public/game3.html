@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo 3 · Regra da Magia  Trilha Mágica</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="theme-g3">
+<div class="bg-art" aria-hidden="true">
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- lua -->
+    <g transform="translate(1420,150)" opacity="0.45">
+      <circle cx="0" cy="0" r="70" fill="#FFD966"/>
+      <circle cx="26" cy="-14" r="62" fill="#EDF0FF"/>
+    </g>
+    <!-- estrelas -->
+    <g fill="#7C6FE0" opacity="0.5">
+      <path d="M220 120 l8 20 20 8 -20 8 -8 20 -8 -20 -20 -8 20 -8 Z"/>
+      <path d="M420 220 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 Z"/>
+      <path d="M120 320 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 Z"/>
+      <path d="M1120 760 l7 17 17 7 -17 7 -7 17 -7 -17 -17 -7 17 -7 Z"/>
+      <path d="M1300 600 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 Z"/>
+      <path d="M80 700 l7 17 17 7 -17 7 -7 17 -7 -17 -17 -7 17 -7 Z"/>
+    </g>
+    <!-- chapéu de mago -->
+    <g transform="translate(190,650)" opacity="0.45">
+      <ellipse cx="0" cy="40" rx="90" ry="18" fill="#7C6FE0"/>
+      <path d="M-46 40 L14 -110 L58 40 Z" fill="#7C6FE0"/>
+      <circle cx="14" cy="-30" r="9" fill="#FFD966"/>
+      <path d="M14 -50 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 Z" fill="#FFD966"/>
+    </g>
+    <!-- varinha com brilho -->
+    <g transform="translate(1360,720) rotate(-25)" opacity="0.5">
+      <rect x="-6" y="0" width="12" height="120" rx="6" fill="#8C5A33"/>
+      <path d="M0 -18 l8 18 18 8 -18 8 -8 18 -8 -18 -18 -8 18 -8 Z" fill="#FFD966"/>
+    </g>
+    <!-- poção mágica -->
+    <g transform="translate(1470,420)" opacity="0.4">
+      <path d="M-14 -30 h28 v18 l16 34 a10 10 0 0 1 -10 16 h-40 a10 10 0 0 1 -10 -16 l16 -34 Z" fill="none" stroke="#0FB6A6" stroke-width="5"/>
+      <path d="M-24 20 a10 10 0 0 0 10 16 h28 a10 10 0 0 0 10 -16 Z" fill="#0FB6A6"/>
+    </g>
+  </svg>
+</div>
+<div id="app"></div>
+<script src="/js/api.js"></script>
+<script src="/js/sounds.js"></script>
+<script src="/js/game3.js"></script>
+</body>
+</html>

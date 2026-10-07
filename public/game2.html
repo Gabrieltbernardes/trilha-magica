@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo 2 · Caminho do Tesouro  Trilha Mágica</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="theme-g2">
+<div class="bg-art" aria-hidden="true">
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- ondas -->
+    <path d="M0 760 Q 200 700 400 760 T 800 760 T 1200 760 T 1600 760 V900 H0 Z" fill="#AEE3FA" opacity="0.55"/>
+    <path d="M0 810 Q 220 770 440 810 T 880 810 T 1320 810 T 1600 810 V900 H0 Z" fill="#8FD6F0" opacity="0.5"/>
+    <!-- ilha à esquerda -->
+    <g transform="translate(150,660)" opacity="0.5">
+      <ellipse cx="0" cy="60" rx="110" ry="26" fill="#F3D9A0"/>
+      <path d="M-8 60 q-4 -110 6 -150" stroke="#8C5A33" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M-2 -80 q40 -6 55 20 q-30 -4 -55 -20 Z" fill="#0FB6A6"/>
+      <path d="M-2 -80 q-46 2 -58 30 q32 -6 58 -30 Z" fill="#0FB6A6"/>
+    </g>
+    <!-- ilha à direita -->
+    <g transform="translate(1420,150)" opacity="0.45">
+      <ellipse cx="0" cy="60" rx="90" ry="20" fill="#F3D9A0"/>
+      <path d="M-6 60 q-4 -90 5 -120" stroke="#8C5A33" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M0 -60 q34 -4 46 16 q-24 -2 -46 -16 Z" fill="#7C6FE0"/>
+      <path d="M0 -60 q-38 2 -48 24 q26 -4 48 -24 Z" fill="#7C6FE0"/>
+    </g>
+    <!-- baú do tesouro -->
+    <g transform="translate(1300,690)" opacity="0.55">
+      <rect x="-46" y="-10" width="92" height="46" rx="8" fill="#B87A4B"/>
+      <path d="M-46 -10 q46 -34 92 0 Z" fill="#8C5A33"/>
+      <rect x="-8" y="-6" width="16" height="14" rx="3" fill="#FFB100"/>
+    </g>
+    <!-- bússola -->
+    <g transform="translate(220,190)" opacity="0.4">
+      <circle cx="0" cy="0" r="46" fill="none" stroke="#0FB6A6" stroke-width="6"/>
+      <path d="M0 -30 L10 0 L0 30 L-10 0 Z" fill="#FF6F5E"/>
+    </g>
+    <!-- caminho pontilhado -->
+    <path d="M260 210 Q 520 340 700 260 T 1150 300 T 1330 660" fill="none" stroke="#0FB6A6" stroke-width="5" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.4"/>
+  </svg>
+</div>
+<div id="app"></div>
+<script src="/js/api.js"></script>
+<script src="/js/sounds.js"></script>
+<script src="/js/game2.js"></script>
+</body>
+</html>

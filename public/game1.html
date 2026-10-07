@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo 1 · Cores Mágicas  Trilha Mágica</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="theme-g1">
+<div class="bg-art" aria-hidden="true">
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- respingos de tinta -->
+    <g opacity="0.30">
+      <circle cx="140" cy="150" r="70" fill="#FF6F5E"/>
+      <circle cx="205" cy="95" r="24" fill="#FF6F5E"/>
+      <circle cx="90" cy="230" r="16" fill="#FF6F5E"/>
+    </g>
+    <g opacity="0.28">
+      <circle cx="1460" cy="180" r="85" fill="#0FB6A6"/>
+      <circle cx="1520" cy="270" r="22" fill="#0FB6A6"/>
+      <circle cx="1390" cy="120" r="14" fill="#0FB6A6"/>
+    </g>
+    <g opacity="0.26">
+      <circle cx="1420" cy="740" r="95" fill="#FFB100"/>
+      <circle cx="1330" cy="800" r="20" fill="#FFB100"/>
+    </g>
+    <g opacity="0.28">
+      <circle cx="130" cy="760" r="80" fill="#7C6FE0"/>
+      <circle cx="220" cy="820" r="18" fill="#7C6FE0"/>
+    </g>
+    <!-- pincel estilizado -->
+    <g transform="translate(760,60) rotate(18)" opacity="0.5">
+      <rect x="-8" y="0" width="16" height="130" rx="8" fill="#B87A4B"/>
+      <rect x="-14" y="120" width="28" height="34" rx="8" fill="#8C5A33"/>
+      <path d="M-16 150 q16 40 32 0 q-16 -14 -32 0 Z" fill="#7C6FE0"/>
+    </g>
+    <!-- gotas coloridas flutuantes -->
+    <g opacity="0.35">
+      <circle cx="420" cy="740" r="10" fill="#FF6F5E"/>
+      <circle cx="470" cy="770" r="7" fill="#FFB100"/>
+      <circle cx="1080" cy="760" r="9" fill="#0FB6A6"/>
+      <circle cx="1150" cy="720" r="6" fill="#7C6FE0"/>
+    </g>
+  </svg>
+</div>
+<div id="app"></div>
+<script src="/js/api.js"></script>
+<script src="/js/sounds.js"></script>
+<script src="/js/game1.js"></script>
+</body>
+</html>
